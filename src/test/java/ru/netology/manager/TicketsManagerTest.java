@@ -3,6 +3,7 @@ package ru.netology.manager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.Tickets;
+import ru.netology.domain.TicketsComparator;
 import ru.netology.repository.TicketsRepository;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -64,6 +65,33 @@ class TicketsManagerTest {
                 testTicket1,
                 testTicket9
         };
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void shouldNotFindFromTo() {
+        Tickets[] actual = manager.findFromTo("NY","MOW");
+        Tickets[] expected = {};
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void shouldFindSorted() {
+        Tickets[] actual = manager.findFromToSorted("LED","MOW", new TicketsComparator());
+        Tickets[] expected = {
+                testTicket2,
+                testTicket10
+        };
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void shouldFindNothing() {
+        Tickets[] actual = manager.findFromToSorted("MOW","MOW", new TicketsComparator());
+        Tickets[] expected = {};
+
         assertArrayEquals(expected, actual);
     }
 }

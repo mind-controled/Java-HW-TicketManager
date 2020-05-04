@@ -3,8 +3,10 @@ package ru.netology.repository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.Tickets;
+import ru.netology.exception.NotFoundException;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TicketsTicketsRepositoryTest {
     private TicketsRepository ticketsRepository = new TicketsRepository();
@@ -54,5 +56,28 @@ class TicketsTicketsRepositoryTest {
         };
         Tickets[] actual = ticketsRepository.getAll();
         assertArrayEquals(expected, actual);
+    }
+    @Test
+    void shouldRemoveById() {
+        ticketsRepository.removeById(1);
+        Tickets[] actual = ticketsRepository.getAll();
+        Tickets[] expected = {
+                testTicket2,
+                testTicket3,
+                testTicket4,
+                testTicket5,
+                testTicket6,
+                testTicket7,
+                testTicket8,
+                testTicket9,
+                testTicket10
+        };
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void shouldRemoveByIdNegative() {
+        assertThrows(NotFoundException.class, () -> ticketsRepository.removeById(10000));
     }
 }
