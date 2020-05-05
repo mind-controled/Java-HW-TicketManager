@@ -20,17 +20,15 @@ public class TicketsManager {
     public Ticket[] findFromTo(String from, String to) {
         Ticket[] result = new Ticket[0];
 
-        for (Ticket offer : ticketsRepository.getAll()) {
+        for (Ticket ticket : ticketsRepository.getAll()) {
             int length = result.length;
-            if (offer.getDeparture().equals(from) && offer.getArrival().equals(to)) {
+            if (ticket.getDeparture().equals(from) && ticket.getArrival().equals(to)) {
                 Ticket[] tmp = new Ticket[length + 1];
                 System.arraycopy(result, 0, tmp, 0, length);
                 int lastIndex = tmp.length - 1;
-                tmp[lastIndex] = offer;
+                tmp[lastIndex] = ticket;
                 result = tmp;
             }
-        }
-        if (result.length > 1) {
             Arrays.sort(result);
         }
         return result;
@@ -55,17 +53,15 @@ public class TicketsManager {
     public Ticket[] findFrom(String from) {
         Ticket[] result = new Ticket[0];
 
-        for (Ticket offer : ticketsRepository.getAll()) {
+        for (Ticket ticket : ticketsRepository.getAll()) {
             int length = result.length;
-            if (offer.getDeparture().equals(from)) {
+            if (ticket.getDeparture().equals(from)) {
                 Ticket[] tmp = new Ticket[length + 1];
                 System.arraycopy(result, 0, tmp, 0, length);
                 int lastIndex = tmp.length - 1;
-                tmp[lastIndex] = offer;
+                tmp[lastIndex] = ticket;
                 result = tmp;
             }
-        }
-        if (result.length > 1) {
             Arrays.sort(result);
         }
         return result;
