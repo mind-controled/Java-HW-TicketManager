@@ -1,29 +1,27 @@
 package ru.netology.repository;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.netology.domain.Tickets;
+import ru.netology.domain.Ticket;
 import ru.netology.exception.NotFoundException;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class TicketsRepository {
-    Tickets[] tickets = new Tickets[0];
+    private Ticket[] tickets = new Ticket[0];
 
-    public void save(Tickets tickets) {
+    public void save(Ticket ticket) {
         int length = this.tickets.length + 1;
-        Tickets[] tmp = new Tickets[length];
+        Ticket[] tmp = new Ticket[length];
         System.arraycopy(this.tickets, 0, tmp, 0, this.tickets.length);
-        tmp[tmp.length - 1] = tickets;
+        tmp[tmp.length - 1] = ticket;
         this.tickets = tmp;
     }
 
-    public Tickets findById(int id) {
-        for (Tickets tickets : tickets) {
-            if (tickets.getId() == id) {
-                return tickets;
+    public Ticket findById(int id) {
+        for (Ticket ticket : tickets) {
+            if (ticket.getId() == id) {
+                return ticket;
             }
         }
         return null;
@@ -34,9 +32,9 @@ public class TicketsRepository {
             throw new NotFoundException("Element with id: " + id + " not found!");
         } else {
             int length = tickets.length - 1;
-            Tickets[] tmp = new Tickets[length];
+            Ticket[] tmp = new Ticket[length];
             int index = 0;
-            for (Tickets item : tickets) {
+            for (Ticket item : tickets) {
                 if (item.getId() != id) {
                     tmp[index] = item;
                     index++;
@@ -46,7 +44,7 @@ public class TicketsRepository {
         }
     }
 
-    public Tickets[] getAll() {
+    public Ticket[] getAll() {
         return tickets;
     }
 }

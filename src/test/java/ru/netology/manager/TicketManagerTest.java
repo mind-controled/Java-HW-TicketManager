@@ -2,28 +2,27 @@ package ru.netology.manager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.netology.domain.Tickets;
+import ru.netology.domain.Ticket;
 import ru.netology.domain.TicketsComparator;
 import ru.netology.repository.TicketsRepository;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-class TicketsManagerTest {
+class TicketManagerTest {
     private TicketsRepository ticketsRepository = new TicketsRepository();
     private TicketsManager manager = new TicketsManager(ticketsRepository);
 
-    private Tickets testTicket1 = new Tickets(1, 1000, "MOW", "LED", 100);
-    private Tickets testTicket2 = new Tickets(2, 1200, "LED", "MOW", 120);
-    private Tickets testTicket3 = new Tickets(3, 1300, "MOW", "GOJ", 130);
-    private Tickets testTicket4 = new Tickets(4, 1400, "GOJ", "MOW", 140);
-    private Tickets testTicket5 = new Tickets(5, 1500, "MOW", "UFA", 150);
-    private Tickets testTicket6 = new Tickets(6, 1600, "UFA", "MOW", 160);
-    private Tickets testTicket7 = new Tickets(7, 1700, "MOW", "БЦН", 170);
-    private Tickets testTicket8 = new Tickets(8, 1800, "БЦН", "MOW", 180);
-    private Tickets testTicket9 = new Tickets(9, 1900, "MOW", "LED", 190);
-    private Tickets testTicket10 = new Tickets(10, 2000, "LED", "MOW", 200);
-
-    private Tickets ticketToAdd = new Tickets(999, 999, "XXX", "ZZZ", 999);
+    private Ticket testTicket1 = new Ticket(1, 1000, "MOW", "LED", 100);
+    private Ticket testTicket2 = new Ticket(2, 1200, "LED", "MOW", 120);
+    private Ticket testTicket3 = new Ticket(3, 1300, "MOW", "GOJ", 130);
+    private Ticket testTicket4 = new Ticket(4, 1400, "GOJ", "MOW", 140);
+    private Ticket testTicket5 = new Ticket(5, 1500, "MOW", "UFA", 150);
+    private Ticket testTicket6 = new Ticket(6, 1600, "UFA", "MOW", 160);
+    private Ticket testTicket7 = new Ticket(7, 1700, "MOW", "БЦН", 170);
+    private Ticket testTicket8 = new Ticket(8, 1800, "БЦН", "MOW", 180);
+    private Ticket testTicket9 = new Ticket(9, 1900, "MOW", "LED", 190);
+    private Ticket testTicket10 = new Ticket(10, 2000, "LED", "MOW", 200);
+    private Ticket ticketToAdd = new Ticket(999, 999, "XXX", "ZZZ", 999);
 
     @BeforeEach
     void SetUp() {
@@ -42,7 +41,7 @@ class TicketsManagerTest {
     @Test
     void shouldAddTicket() {
         manager.add(ticketToAdd);
-        Tickets[] expected = {
+        Ticket[] expected = {
                 testTicket1,
                 testTicket2,
                 testTicket3,
@@ -60,26 +59,25 @@ class TicketsManagerTest {
 
     @Test
     void shouldFindFromTo() {
-        Tickets[] actual = manager.findFromTo("MOW","LED");
-        Tickets[] expected = {
-                testTicket1,
-                testTicket9
+        Ticket[] actual = manager.findFromTo("MOW","БЦН");
+        Ticket[] expected = {
+                testTicket7
         };
         assertArrayEquals(expected, actual);
     }
 
     @Test
     void shouldNotFindFromTo() {
-        Tickets[] actual = manager.findFromTo("NY","MOW");
-        Tickets[] expected = {};
+        Ticket[] actual = manager.findFromTo("NY","MOW");
+        Ticket[] expected = {};
 
         assertArrayEquals(expected, actual);
     }
 
     @Test
     void shouldFindSorted() {
-        Tickets[] actual = manager.findFromToSorted("LED","MOW", new TicketsComparator());
-        Tickets[] expected = {
+        Ticket[] actual = manager.findFromToSorted("LED","MOW", new TicketsComparator());
+        Ticket[] expected = {
                 testTicket2,
                 testTicket10
         };
@@ -89,8 +87,22 @@ class TicketsManagerTest {
 
     @Test
     void shouldFindNothing() {
-        Tickets[] actual = manager.findFromToSorted("MOW","MOW", new TicketsComparator());
-        Tickets[] expected = {};
+        Ticket[] actual = manager.findFromToSorted("MOW","MOW", new TicketsComparator());
+        Ticket[] expected = {};
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void shouldFindFrom() {
+        Ticket[] actual = manager.findFrom("MOW");
+        Ticket[] expected = {
+                testTicket1,
+                testTicket3,
+                testTicket5,
+                testTicket7,
+                testTicket9
+        };
 
         assertArrayEquals(expected, actual);
     }

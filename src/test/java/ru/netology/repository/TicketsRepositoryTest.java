@@ -2,27 +2,26 @@ package ru.netology.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.netology.domain.Tickets;
+import ru.netology.domain.Ticket;
 import ru.netology.exception.NotFoundException;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class TicketsTicketsRepositoryTest {
+class TicketsRepositoryTest {
     private TicketsRepository ticketsRepository = new TicketsRepository();
 
-    private Tickets testTicket1 = new Tickets(1, 1000, "MOW", "LED", 100);
-    private Tickets testTicket2 = new Tickets(2, 1200, "LED", "MOW", 120);
-    private Tickets testTicket3 = new Tickets(3, 1300, "MOW", "GOJ", 130);
-    private Tickets testTicket4 = new Tickets(4, 1400, "GOJ", "MOW", 140);
-    private Tickets testTicket5 = new Tickets(5, 1500, "MOW", "UFA", 150);
-    private Tickets testTicket6 = new Tickets(6, 1600, "UFA", "MOW", 160);
-    private Tickets testTicket7 = new Tickets(7, 1700, "MOW", "БЦН", 170);
-    private Tickets testTicket8 = new Tickets(8, 1800, "БЦН", "MOW", 180);
-    private Tickets testTicket9 = new Tickets(9, 1900, "MOW", "LED", 190);
-    private Tickets testTicket10 = new Tickets(10, 2000, "LED", "MOW", 200);
-
-    private Tickets ticketToAdd = new Tickets(999, 999, "XXX", "ZZZ", 999);
+    private Ticket testTicket1 = new Ticket(1, 1000, "MOW", "LED", 100);
+    private Ticket testTicket2 = new Ticket(2, 1200, "LED", "MOW", 120);
+    private Ticket testTicket3 = new Ticket(3, 1300, "MOW", "GOJ", 130);
+    private Ticket testTicket4 = new Ticket(4, 1400, "GOJ", "MOW", 140);
+    private Ticket testTicket5 = new Ticket(5, 1500, "MOW", "UFA", 150);
+    private Ticket testTicket6 = new Ticket(6, 1600, "UFA", "MOW", 160);
+    private Ticket testTicket7 = new Ticket(7, 1700, "MOW", "БЦН", 170);
+    private Ticket testTicket8 = new Ticket(8, 1800, "БЦН", "MOW", 180);
+    private Ticket testTicket9 = new Ticket(9, 1900, "MOW", "LED", 190);
+    private Ticket testTicket10 = new Ticket(10, 2000, "LED", "MOW", 200);
+    private Ticket ticketToAdd = new Ticket(999, 999, "XXX", "ZZZ", 999);
 
     @BeforeEach
     void SetUp() {
@@ -41,7 +40,7 @@ class TicketsTicketsRepositoryTest {
     @Test
     void shouldSaveAndGetAll() {
         ticketsRepository.save(ticketToAdd);
-        Tickets[] expected = {
+        Ticket[] expected = {
                 testTicket1,
                 testTicket2,
                 testTicket3,
@@ -54,14 +53,15 @@ class TicketsTicketsRepositoryTest {
                 testTicket10,
                 ticketToAdd
         };
-        Tickets[] actual = ticketsRepository.getAll();
+        Ticket[] actual = ticketsRepository.getAll();
         assertArrayEquals(expected, actual);
     }
+
     @Test
     void shouldRemoveById() {
         ticketsRepository.removeById(1);
-        Tickets[] actual = ticketsRepository.getAll();
-        Tickets[] expected = {
+        Ticket[] actual = ticketsRepository.getAll();
+        Ticket[] expected = {
                 testTicket2,
                 testTicket3,
                 testTicket4,
