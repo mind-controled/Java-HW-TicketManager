@@ -1,25 +1,23 @@
 package ru.netology.repository;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.netology.domain.Tickets;
+import ru.netology.domain.Ticket;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class TicketsRepository {
-    Tickets[] tickets = new Tickets[0];
+    private Ticket[] tickets = new Ticket[0];
 
-    public void save(Tickets tickets) {
+    public void save(Ticket ticket) {
         int length = this.tickets.length + 1;
-        Tickets[] tmp = new Tickets[length];
+        Ticket[] tmp = new Ticket[length];
         System.arraycopy(this.tickets, 0, tmp, 0, this.tickets.length);
-        tmp[tmp.length - 1] = tickets;
+        tmp[tmp.length - 1] = ticket;
         this.tickets = tmp;
     }
 
-    public Tickets[] getAll() {
+    public Ticket[] getAll() {
         return tickets;
     }
 }
