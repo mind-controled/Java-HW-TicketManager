@@ -28,8 +28,6 @@ public class TicketsManager {
                 tmp[lastIndex] = offer;
                 result = tmp;
             }
-        }
-        if (result.length != 1) {
             Arrays.sort(result);
         }
         return result;
@@ -47,8 +45,6 @@ public class TicketsManager {
                 tmp[lastIndex] = offer;
                 result = tmp;
             }
-        }
-        if (result.length != 1) {
             Arrays.sort(result);
         }
         return result;
