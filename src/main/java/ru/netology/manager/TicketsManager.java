@@ -29,8 +29,8 @@ public class TicketsManager {
                 tmp[lastIndex] = ticket;
                 result = tmp;
             }
-            Arrays.sort(result);
         }
+        Arrays.sort(result);
         return result;
     }
 
@@ -62,8 +62,8 @@ public class TicketsManager {
                 tmp[lastIndex] = ticket;
                 result = tmp;
             }
-            Arrays.sort(result);
         }
+        Arrays.sort(result);
         return result;
     }
 }
